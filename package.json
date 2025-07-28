@@ -26,7 +26,7 @@
   "scripts": {
     "build": "tsup",
     "pack": "rm -f dropinblog-*.tgz && npm run build && npm pack",
-    "publish": "npm run build && npm publish",
+    "publish": "npm run build && npm publish --access public",
     "bump:patch": "npm version patch",
     "bump:minor": "npm version minor",
     "bump:major": "npm version major"
