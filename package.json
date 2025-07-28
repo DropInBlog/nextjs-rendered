@@ -1,6 +1,6 @@
 {
   "name": "@dropinblog/nextjs-page-fetcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DropInBlog page fetcher for Next.js projects.",
   "homepage": "https://github.com/DropInBlog/nextjs-page-fetcher#readme",
   "bugs": {
