@@ -1,14 +1,14 @@
 {
-  "name": "@dropinblog/nextjs-page-fetcher",
+  "name": "@dropinblog/nextjs-rendered",
   "version": "1.0.1",
-  "description": "DropInBlog page fetcher for Next.js projects.",
-  "homepage": "https://github.com/DropInBlog/nextjs-page-fetcher#readme",
+  "description": "DropInBlog rendered content for Next.js projects.",
+  "homepage": "https://github.com/DropInBlog/nextjs-rendered#readme",
   "bugs": {
-    "url": "https://github.com/DropInBlog/nextjs-page-fetcher/issues"
+    "url": "https://github.com/DropInBlog/nextjs-rendered/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DropInBlog/nextjs-page-fetcher.git"
+    "url": "git+https://github.com/DropInBlog/nextjs-rendered.git"
   },
   "keywords": [
     "dropinblog",

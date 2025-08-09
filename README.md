@@ -1,4 +1,4 @@
-# nextjs-page-fetcher
+# nextjs-rendered
 
 DropInBlog page fetcher for Next.js projects.
 
@@ -11,7 +11,7 @@ DropInBlog page fetcher for Next.js projects.
 ## Installation
 
 ```sh
-npm install @dropinblog/nextjs-page-fetcher
+npm install @dropinblog/nextjs-rendered
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ npm install @dropinblog/nextjs-page-fetcher
 ### 1. Initialize the API
 
 ```ts
-import DibApi from '@dropinblog/nextjs-page-fetcher';
+import DibApi from '@dropinblog/nextjs-rendered';
 
 const api = new DibApi('YOUR_TOKEN', 'YOUR_BLOG_ID');
 ```
@@ -28,7 +28,7 @@ const api = new DibApi('YOUR_TOKEN', 'YOUR_BLOG_ID');
 
 ```ts
 import { dibApi } from '@/lib/api';
-import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-page-fetcher';
+import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-rendered';
 import React from 'react';
 
 export const generateMetadata = async ({
@@ -42,7 +42,7 @@ export const generateMetadata = async ({
 
 ```tsx
 import { dibApi } from '@/lib/api';
-import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-page-fetcher';
+import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-rendered';
 import React from 'react';
 
 export default async function Blog({ params }: { params: { slug: string } }) {
@@ -58,7 +58,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
 
 ```ts
 import { dibApi } from '@/lib/api';
-import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-page-fetcher';
+import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-rendered';
 
 export const generateMetadata = async ({
   params,
