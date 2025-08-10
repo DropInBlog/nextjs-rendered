@@ -154,4 +154,12 @@ export default class DibApi {
       throw error;
     }
   };
+
+  fetchBlogFeed = async () => {
+    const url = `https://api.dropinblog.com/v2/blog/${this.blogId}/rendered/feed`;
+    const res = await fetch(url, this.getOptions());
+
+    const data = await res.json();
+    return data;
+  };
 }
