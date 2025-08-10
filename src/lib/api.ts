@@ -141,4 +141,17 @@ export default class DibApi {
       throw error;
     }
   };
+
+  fetchSitemap = async () => {
+    try {
+      const url = `https://api.dropinblog.com/v2/blog/${this.blogId}/rendered/sitemap`;
+      const res = await fetch(url, this.getOptions());
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching sitemap:', (error as Error).message);
+      throw error;
+    }
+  };
 }
