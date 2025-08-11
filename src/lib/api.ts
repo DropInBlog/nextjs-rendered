@@ -170,4 +170,12 @@ export default class DibApi {
     const data = await res.json();
     return data;
   };
+
+  fetchAuthorFeed = async ({ slug }: { slug: string }) => {
+    const url = `https://api.dropinblog.com/v2/blog/${this.blogId}/rendered/feed/author/${slug}`;
+    const res = await fetch(url, this.getOptions());
+
+    const data = await res.json();
+    return data;
+  };
 }
