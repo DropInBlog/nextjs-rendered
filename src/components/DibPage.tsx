@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface DibPageFetcherProps {
+interface DibPageProps {
   body_html: string;
   head_data: {
     css?: string;
@@ -8,7 +8,7 @@ interface DibPageFetcherProps {
   };
 }
 
-const DibPageFetcher: React.FC<DibPageFetcherProps> = ({
+const DibPage: React.FC<DibPageProps> = ({
   body_html,
   head_data,
 }) => {
@@ -43,4 +43,4 @@ const DibPageFetcher: React.FC<DibPageFetcherProps> = ({
   );
 };
 
-export default DibPageFetcher;
+export default DibPage;
