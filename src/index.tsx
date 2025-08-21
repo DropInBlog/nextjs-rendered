@@ -1,5 +1,5 @@
-import DibPage from './components/DibPage';
+import DibBlog from './components/DibBlog';
 import DibApi from './lib/api';
 import * as dibUtils from './lib/utils';
 
-export { DibPage, DibApi, dibUtils };
+export { DibBlog, DibApi, dibUtils };

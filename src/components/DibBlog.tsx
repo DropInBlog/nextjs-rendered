@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface DibPageProps {
+interface DibBlogProps {
   body_html: string;
   head_data: {
     css?: string;
@@ -8,10 +8,7 @@ interface DibPageProps {
   };
 }
 
-const DibPage: React.FC<DibPageProps> = ({
-  body_html,
-  head_data,
-}) => {
+const DibBlog: React.FC<DibBlogProps> = ({ body_html, head_data }) => {
   return (
     <>
       {/* Inject style manually */}
@@ -43,4 +40,4 @@ const DibPage: React.FC<DibPageProps> = ({
   );
 };
 
-export default DibPage;
+export default DibBlog;
