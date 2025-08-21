@@ -28,7 +28,7 @@ const api = new DibApi('YOUR_TOKEN', 'YOUR_BLOG_ID');
 
 ```ts
 import { dibApi } from '@/lib/api';
-import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-rendered';
+import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
 import React from 'react';
 
 export const generateMetadata = async ({
@@ -42,7 +42,7 @@ export const generateMetadata = async ({
 
 ```tsx
 import { dibApi } from '@/lib/api';
-import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-rendered';
+import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
 import React from 'react';
 
 export default async function Blog({ params }: { params: { slug: string } }) {
@@ -50,7 +50,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
   const { body_html, head_data } = await dibApi.fetchPost({
     slug,
   });
-  return <DibPageFetcher body_html={body_html} head_data={head_data} />;
+  return <DibBlog body_html={body_html} head_data={head_data} />;
 }
 ```
 
@@ -58,7 +58,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
 
 ```ts
 import { dibApi } from '@/lib/api';
-import { DibPageFetcher, dibUtils } from '@dropinblog/nextjs-rendered';
+import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
 
 export const generateMetadata = async ({
   params,
@@ -80,7 +80,7 @@ export default async function AuthorPagination({
     slug,
     pagination,
   });
-  return <DibPageFetcher body_html={body_html} head_data={head_data} />;
+  return <DibBlog body_html={body_html} head_data={head_data} />;
 }
 ```
 
@@ -94,7 +94,7 @@ export default async function AuthorPagination({
 - `fetchCategories({ slug, pagination? })`
 - `fetchAuthor({ slug, pagination? })`
 
-### `DibPageFetcher`
+### `DibBlog`
 
 React component to render fetched blog content.
 
