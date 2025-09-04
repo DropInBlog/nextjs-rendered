@@ -7,6 +7,7 @@ DropInBlog page fetcher for Next.js projects.
 - Fetch and render DropInBlog content in Next.js apps
 - SEO metadata generation
 - Easy integration with React components
+- Supports pagination and author/category filtering
 
 ## Installation
 
@@ -24,12 +25,11 @@ import DibApi from '@dropinblog/nextjs-rendered';
 const api = new DibApi('YOUR_TOKEN', 'YOUR_BLOG_ID');
 ```
 
-### 2. Genarate metadata
+### 2. Generate Metadata
 
 ```ts
 import { dibApi } from '@/lib/api';
 import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-import React from 'react';
 
 export const generateMetadata = async ({
   params,
@@ -38,18 +38,15 @@ export const generateMetadata = async ({
 }) => dibUtils.generateMetadataFromFetcher(dibApi.fetchPost, params);
 ```
 
-### 3. Render Content
+### 3. Render Blog Content
 
 ```tsx
 import { dibApi } from '@/lib/api';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-import React from 'react';
+import { DibBlog } from '@dropinblog/nextjs-rendered';
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
-  const { body_html, head_data } = await dibApi.fetchPost({
-    slug,
-  });
+  const { slug } = params;
+  const { body_html, head_data } = await dibApi.fetchPost({ slug });
   return <DibBlog body_html={body_html} head_data={head_data} />;
 }
 ```
@@ -58,7 +55,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
 
 ```ts
 import { dibApi } from '@/lib/api';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
+import { dibUtils } from '@dropinblog/nextjs-rendered';
 
 export const generateMetadata = async ({
   params,
@@ -67,15 +64,18 @@ export const generateMetadata = async ({
 }) => dibUtils.generateMetadataFromFetcher(dibApi.fetchAuthor, params);
 ```
 
-### 5. Render Content (with pagination)
+### 5. Render Author Content (with pagination)
 
 ```tsx
+import { dibApi } from '@/lib/api';
+import { DibBlog } from '@dropinblog/nextjs-rendered';
+
 export default async function AuthorPagination({
   params,
 }: {
   params: { pagination: string; slug: string };
 }) {
-  const { pagination, slug } = await params;
+  const { pagination, slug } = params;
   const { body_html, head_data } = await dibApi.fetchAuthor({
     slug,
     pagination,
@@ -84,7 +84,14 @@ export default async function AuthorPagination({
 }
 ```
 
+## Requirements
+
+- Node.js 18+
+
 ## API Reference
+
+See the official DropInBlog API documentation for more details:  
+[DropInBlog API Reference](https://dropinblog.readme.io/reference/api-reference)
 
 ### `DibApi`
 
@@ -93,6 +100,10 @@ export default async function AuthorPagination({
 - `fetchPost({ slug })`
 - `fetchCategories({ slug, pagination? })`
 - `fetchAuthor({ slug, pagination? })`
+- `fetchSitemap()`
+- `fetchBlogFeed()`
+- `fetchCategoryFeed({ slug })`
+- `fetchAuthorFeed({ slug })`
 
 ### `DibBlog`
 
@@ -112,6 +123,6 @@ React component to render fetched blog content.
 
 ISC
 
-## Author
+## Links
 
-Mohamed Nidal Touhami
+- [DropInBlog](https://dropinblog.com/)
