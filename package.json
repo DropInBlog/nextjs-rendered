@@ -1,6 +1,6 @@
 {
   "name": "@dropinblog/nextjs-rendered",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "DropInBlog rendered content for Next.js projects.",
   "homepage": "https://github.com/DropInBlog/nextjs-rendered#readme",
   "bugs": {
