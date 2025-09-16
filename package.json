@@ -18,7 +18,7 @@
     "blog"
   ],
   "license": "ISC",
-  "author": "Mohamed Nidal Touhami",
+  "author": "DropInBlog",
   "type": "commonjs",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
