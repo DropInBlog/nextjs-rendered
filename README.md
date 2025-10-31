@@ -62,7 +62,7 @@ Notes:
 File: lib/dib.ts
 
 ```ts
-import { DibApi } from '@dropinblog/nextjs-rendered';
+import DibApi from "@dropinblog/dropinblog-api-client";
 
 export const dibApi = new DibApi(
   process.env.DROPINBLOG_TOKEN!, // Your DropInBlog API token
