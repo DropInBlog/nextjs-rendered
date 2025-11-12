@@ -7,7 +7,7 @@ An easy-to-use package for integrating [DropInBlog](https://dropinblog.com/) in 
 ## Features
 
 - Fetch and render DropInBlog content in Next.js apps
-- SEO-ready: helpers to generate Next.js metadata from API responses
+- SEO ready: helpers to generate Next.js metadata from API responses
 - Pagination for main list, categories, and authors
 - XML sitemap
 - RSS feeds
@@ -62,7 +62,7 @@ Notes:
 File: lib/dib.ts
 
 ```ts
-import DibApi from "@dropinblog/dropinblog-api-client";
+import DibApi from "@dropinblog/api-client";
 
 export const dibApi = new DibApi(
   process.env.DROPINBLOG_TOKEN!, // Your DropInBlog API token
