@@ -1,11 +1,15 @@
 import React from 'react';
 
 interface DibBlogProps {
-  body_html: string;
+  body_html: string | undefined;
   head_data: {
-    css?: string;
-    schema?: string;
+    css?: string | undefined;
+    schema?: string | undefined;
   };
+}
+
+function removeNewLines(str: string): string {
+  return str.replace(/\n/g, '');
 }
 
 const DibBlog: React.FC<DibBlogProps> = ({ body_html, head_data }) => {
@@ -15,25 +19,25 @@ const DibBlog: React.FC<DibBlogProps> = ({ body_html, head_data }) => {
       {head_data && head_data.css && (
         <style
           dangerouslySetInnerHTML={{
-            __html: head_data.css || '',
+            __html: removeNewLines(head_data.css) || '',
           }}
-          suppressHydrationWarning
+          suppressHydrationWarning={true}
         />
       )}
 
       {head_data && head_data.schema && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: head_data.schema }}
-          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: removeNewLines( head_data.schema) }}
+          suppressHydrationWarning={true}
         />
       )}
 
       {/* Main content */}
       {body_html && (
         <main
-          dangerouslySetInnerHTML={{ __html: body_html }}
-          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html:removeNewLines( body_html) }}
+          suppressHydrationWarning={true}
         />
       )}
     </>
