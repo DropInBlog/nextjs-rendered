@@ -5,7 +5,7 @@ interface DibBlogProps {
   head_data: {
     css?: string | undefined;
     schema?: string | undefined;
-  };
+  } | undefined;
 }
 
 function removeNewLines(str: string): string {

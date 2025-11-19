@@ -6,13 +6,16 @@ var __export = (target, all) => {
 
 // src/components/DibBlog.tsx
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+function removeNewLines(str) {
+  return str.replace(/\n/g, "");
+}
 var DibBlog = ({ body_html, head_data }) => {
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     head_data && head_data.css && /* @__PURE__ */ jsx(
       "style",
       {
         dangerouslySetInnerHTML: {
-          __html: head_data.css || ""
+          __html: removeNewLines(head_data.css) || ""
         },
         suppressHydrationWarning: true
       }
@@ -21,14 +24,14 @@ var DibBlog = ({ body_html, head_data }) => {
       "script",
       {
         type: "application/ld+json",
-        dangerouslySetInnerHTML: { __html: head_data.schema },
+        dangerouslySetInnerHTML: { __html: removeNewLines(head_data.schema) },
         suppressHydrationWarning: true
       }
     ),
     body_html && /* @__PURE__ */ jsx(
       "main",
       {
-        dangerouslySetInnerHTML: { __html: body_html },
+        dangerouslySetInnerHTML: { __html: removeNewLines(body_html) },
         suppressHydrationWarning: true
       }
     )

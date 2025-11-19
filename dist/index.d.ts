@@ -2,11 +2,11 @@ import React from 'react';
 import { Metadata } from 'next';
 
 interface DibBlogProps {
-    body_html: string;
+    body_html: string | undefined;
     head_data: {
-        css?: string;
-        schema?: string;
-    };
+        css?: string | undefined;
+        schema?: string | undefined;
+    } | undefined;
 }
 declare const DibBlog: React.FC<DibBlogProps>;
 

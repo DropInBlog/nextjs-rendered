@@ -27,13 +27,16 @@ module.exports = __toCommonJS(src_exports);
 
 // src/components/DibBlog.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
+function removeNewLines(str) {
+  return str.replace(/\n/g, "");
+}
 var DibBlog = ({ body_html, head_data }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
     head_data && head_data.css && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
       "style",
       {
         dangerouslySetInnerHTML: {
-          __html: head_data.css || ""
+          __html: removeNewLines(head_data.css) || ""
         },
         suppressHydrationWarning: true
       }
@@ -42,14 +45,14 @@ var DibBlog = ({ body_html, head_data }) => {
       "script",
       {
         type: "application/ld+json",
-        dangerouslySetInnerHTML: { __html: head_data.schema },
+        dangerouslySetInnerHTML: { __html: removeNewLines(head_data.schema) },
         suppressHydrationWarning: true
       }
     ),
     body_html && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
       "main",
       {
-        dangerouslySetInnerHTML: { __html: body_html },
+        dangerouslySetInnerHTML: { __html: removeNewLines(body_html) },
         suppressHydrationWarning: true
       }
     )
