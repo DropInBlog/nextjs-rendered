@@ -52,6 +52,7 @@ DROPINBLOG_BLOG_ID=your_blog_id_here
 ```
 
 Notes:
+
 - Do not commit .env.local to version control.
 - In Vercel or other hosting, set these as environment variables in the dashboard.
 
@@ -62,7 +63,7 @@ Notes:
 File: lib/dib.ts
 
 ```ts
-import DibApi from "@dropinblog/api-client";
+import DibApi from '@dropinblog/api-client';
 
 export const dibApi = new DibApi(
   process.env.DROPINBLOG_TOKEN!, // Your DropInBlog API token
@@ -80,113 +81,35 @@ File: app/blog/page.tsx
 import { dibApi } from '@/lib/dib';
 import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
 
-export const generateMetadata = async () => 
+export const generateMetadata = async () =>
   dibUtils.generateMetadataFromFetcher(dibApi.fetchMainList);
 
 export default async function BlogPage() {
   const { body_html, head_data } = await dibApi.fetchMainList();
-  return <DibBlog body_html={body_html} head_data={head_data} />;
+  return <DibBlog.BodyTag body_html={body_html} />;
 }
 ```
 
-File: app/blog/page/[page]/page.tsx
+**Layout:**
+
+File: app/blog/layout.tsx
 
 ```tsx
 import { dibApi } from '@/lib/dib';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
+import { DibBlog } from '@dropinblog/nextjs-rendered';
 
-export const generateMetadata = async ({ params }: { params: { page: string } }) =>
-  dibUtils.generateMetadataFromFetcher(dibApi.fetchMainList, { pagination: params.page });
-
-export default async function BlogPagePaginated({ params }: { params: { page: string } }) {
-  const { body_html, head_data } = await dibApi.fetchMainList({ pagination: params.page });
-  return <DibBlog body_html={body_html} head_data={head_data} />;
-}
-```
-
-**Single Post Page:**
-
-File: app/blog/[slug]/page.tsx
-
-```tsx
-import { dibApi } from '@/lib/dib';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-
-export const generateMetadata = async ({
-  params,
+export default async function BlogLayout({
+  children,
 }: {
-  params: { slug: string };
-}) => dibUtils.generateMetadataFromFetcher(dibApi.fetchPost, params);
-
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  const { body_html, head_data } = await dibApi.fetchPost({ slug });
-  return <DibBlog body_html={body_html} head_data={head_data} />;
-}
-```
-
-**Category Pages (with pagination):**
-
-File: app/blog/category/[slug]/page.tsx
-
-```tsx
-import { dibApi } from '@/lib/dib';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-
-// Route: /blog/category/[slug]
-export const generateMetadata = async ({ params }: { params: { slug: string } }) =>
-  dibUtils.generateMetadataFromFetcher(dibApi.fetchCategories, { slug: params.slug });
-
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
-  const { body_html, head_data } = await dibApi.fetchCategories({ slug: params.slug });
-  return <DibBlog body_html={body_html} head_data={head_data} />;
-}
-```
-
-File: app/blog/category/[slug]/page/[page]/page.tsx
-
-```tsx
-import { dibApi } from '@/lib/dib';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-
-export const generateMetadata = async ({ params }: { params: { slug: string; page: string } }) =>
-  dibUtils.generateMetadataFromFetcher(dibApi.fetchCategories, { slug: params.slug, pagination: params.page });
-
-export default async function CategoryPagePaginated({ params }: { params: { slug: string; page: string } }) {
-  const { body_html, head_data } = await dibApi.fetchCategories({ slug: params.slug, pagination: params.page });
-  return <DibBlog body_html={body_html} head_data={head_data} />;
-}
-```
-
-**Author Pages (with pagination):**
-
-File: app/blog/author/[slug]/page.tsx
-
-```tsx
-import { dibApi } from '@/lib/dib';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-
-export const generateMetadata = async ({ params }: { params: { slug: string } }) =>
-  dibUtils.generateMetadataFromFetcher(dibApi.fetchAuthor, { slug: params.slug });
-
-export default async function AuthorPage({ params }: { params: { slug: string } }) {
-  const { body_html, head_data } = await dibApi.fetchAuthor({ slug: params.slug });
-  return <DibBlog body_html={body_html} head_data={head_data} />;
-}
-```
-
-File: app/blog/author/[slug]/page/[page]/page.tsx
-
-```tsx
-import { dibApi } from '@/lib/dib';
-import { DibBlog, dibUtils } from '@dropinblog/nextjs-rendered';
-
-export const generateMetadata = async ({ params }: { params: { slug: string; page: string } }) =>
-  dibUtils.generateMetadataFromFetcher(dibApi.fetchAuthor, { slug: params.slug, pagination: params.page });
-
-export default async function AuthorPagePaginated({ params }: { params: { slug: string; page: string } }) {
-  const { body_html, head_data } = await dibApi.fetchAuthor({ slug: params.slug, pagination: params.page });
-  return <DibBlog body_html={body_html} head_data={head_data} />;
+  children: React.ReactNode;
+}) {
+  const { head_html } = await dibApi.fetchMainList();
+  return (
+    <html>
+      <DibBlog.HeadTag head_html={head_html} />
+      ...
+    </html>
+  );
 }
 ```
 
@@ -199,46 +122,49 @@ import { dibApi } from '@/lib/dib';
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const json = await dibApi.fetchSitemap();
+  const json = await dibApi.fetchSitemap();
 
-    const urlRegex = /<url>([\s\S]*?)<\/url>/g;
-    const locRegex = /<loc>(.*?)<\/loc>/;
-    const lastmodRegex = /<lastmod>(.*?)<\/lastmod>/;
+  const urlRegex = /<url>([\s\S]*?)<\/url>/g;
+  const locRegex = /<loc>(.*?)<\/loc>/;
+  const lastmodRegex = /<lastmod>(.*?)<\/lastmod>/;
 
-    const urls: MetadataRoute.Sitemap = [];
-    const matches = json.data.sitemap.match(urlRegex) || [];
+  const urls: MetadataRoute.Sitemap = [];
+  const matches = json.data.sitemap.match(urlRegex) || [];
 
-    for (const urlBlock of matches) {
-        const locMatch = urlBlock.match(locRegex);
-        const lastmodMatch = urlBlock.match(lastmodRegex);
+  for (const urlBlock of matches) {
+    const locMatch = urlBlock.match(locRegex);
+    const lastmodMatch = urlBlock.match(lastmodRegex);
 
-        if (locMatch) {
-            urls.push({
-                url: locMatch[1],
-                lastModified: lastmodMatch ? lastmodMatch[1] : undefined,
-            });
-        }
+    if (locMatch) {
+      urls.push({
+        url: locMatch[1],
+        lastModified: lastmodMatch ? lastmodMatch[1] : undefined,
+      });
     }
+  }
 
-    return urls;
+  return urls;
 }
 ```
 
 **Feeds**
 
-File: app/api/dib/feed/route.ts
+File: app/feed/route.ts
 
 ```ts
-import { dibApi } from '@/lib/dib';
+import { dibApi } from '../../../dib-lib/api';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-    const json = await dibApi.fetchBlogFeed();
-    return new NextResponse(json.data.feed, {
-        headers: {
-            'Content-Type': json.data.content_type,
-        },
-    });
+  const data = await dibApi.fetchBlogFeed();
+  const headers: HeadersInit = {};
+  if (data.content_type) {
+    headers['Content-Type'] = data.content_type;
+  }
+
+  return new NextResponse(data.feed, {
+    headers,
+  });
 }
 ```
 
