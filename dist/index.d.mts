@@ -2,13 +2,28 @@ import React from 'react';
 import { Metadata } from 'next';
 
 interface DibBlogProps {
-    body_html: string | undefined;
-    head_data: {
-        css?: string | undefined;
-        schema?: string | undefined;
-    } | undefined;
+    body_html?: string;
+    head_html?: string;
+    head_data?: {
+        title: string;
+        rss_url: string;
+        seo_url_next: string;
+        css: string;
+    };
+    head_items?: {
+        title: string;
+        'og:title': string;
+        'twitter:title': string;
+        rss_rl: string;
+        seo_url_next: string;
+        js: string;
+        css: string;
+    };
 }
-declare const DibBlog: React.FC<DibBlogProps>;
+declare const DibBlog: {
+    BodyTag: React.FC<DibBlogProps>;
+    HeadTag: React.FC<DibBlogProps>;
+};
 
 type HeadData = {
     title?: string;

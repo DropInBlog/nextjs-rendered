@@ -5,37 +5,31 @@ var __export = (target, all) => {
 };
 
 // src/components/DibBlog.tsx
-import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import { Fragment, jsx } from "react/jsx-runtime";
 function removeNewLines(str) {
   return str.replace(/\n/g, "");
 }
-var DibBlog = ({ body_html, head_data }) => {
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    head_data && head_data.css && /* @__PURE__ */ jsx(
-      "style",
-      {
-        dangerouslySetInnerHTML: {
-          __html: removeNewLines(head_data.css) || ""
-        },
-        suppressHydrationWarning: true
-      }
-    ),
-    head_data && head_data.schema && /* @__PURE__ */ jsx(
-      "script",
-      {
-        type: "application/ld+json",
-        dangerouslySetInnerHTML: { __html: removeNewLines(head_data.schema) },
-        suppressHydrationWarning: true
-      }
-    ),
-    body_html && /* @__PURE__ */ jsx(
-      "main",
-      {
-        dangerouslySetInnerHTML: { __html: removeNewLines(body_html) },
-        suppressHydrationWarning: true
-      }
-    )
-  ] });
+var HeadTag = ({ head_html }) => {
+  return /* @__PURE__ */ jsx(Fragment, { children: head_html && /* @__PURE__ */ jsx(
+    "head",
+    {
+      dangerouslySetInnerHTML: { __html: head_html },
+      suppressHydrationWarning: true
+    }
+  ) });
+};
+var BodyTag = ({ body_html }) => {
+  return /* @__PURE__ */ jsx(Fragment, { children: body_html && /* @__PURE__ */ jsx(
+    "main",
+    {
+      dangerouslySetInnerHTML: { __html: removeNewLines(body_html) },
+      suppressHydrationWarning: true
+    }
+  ) });
+};
+var DibBlog = {
+  BodyTag,
+  HeadTag
 };
 var DibBlog_default = DibBlog;
 
